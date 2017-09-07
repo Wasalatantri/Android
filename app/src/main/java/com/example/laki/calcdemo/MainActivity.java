@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String first_val;
+
     private final int ONE=1;
     private final int TWO=2;
     private final int THREE=3;
@@ -257,19 +257,23 @@ public class MainActivity extends AppCompatActivity {
             value2=extractval(display.getText().toString());
             if(multiOn){
                  temp=value1*value2;
-                display.setText(Double.toString(temp));
+                String sTemp= extractIfNoFraction(temp);
+                display.setText(sTemp);
             }else if(subOn){
                 temp=value1-value2;
-                display.setText(Double.toString(temp));
+                String sTemp= extractIfNoFraction(temp);
+                display.setText(sTemp);
             }else if(dividOn){
                 if(value2==Double.valueOf("0")){
                     display.setText("Inf");
                 }
                 temp=value1/value2;
-                display.setText(Double.toString(temp));
+                String sTemp= extractIfNoFraction(temp);
+                display.setText(sTemp);
             }else if(plusOn){
                 temp=value1+value2;
-                display.setText(Double.toString(temp));
+                String sTemp= extractIfNoFraction(temp);
+                display.setText(sTemp);
             }else {
                 display.setText("");
             }
@@ -280,6 +284,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    private String extractIfNoFraction(double temp) {
+        if(temp%1==0){
+            return String.valueOf (new Double(temp).longValue());
+
+        }else return Double.toString(temp);
+    }
+
 
     private double extractval(String text) throws NumberFormatException {
         if(text==null){
